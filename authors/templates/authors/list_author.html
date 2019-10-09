@@ -1,0 +1,35 @@
+{% extends 'base_page.html' %}
+
+    {% block title %}
+            List authors
+        {% endblock %}
+
+    {% block content_title%}
+                List authors
+    {% endblock%}
+
+     {% block content %}
+        {% for author in pages.items %}
+           <p><a href="{{url_for('authors.author_info', slug=author.slug)}}">{{ author.name }}<a/></p>
+        {% endfor %}
+
+          <nav>
+          <ul class="pagination">
+            <li {% if not pages.has_prev %} class="page-item disabled" {% endif %} >
+              <a class="page-link" href="./?page={{ pages.prev_num }}" aria-label="Previous"><span aria-hidden="true">Previous</span></a>
+            </li>
+
+              {% for page in pages.iter_pages() %}
+            <li {% if page == pages.page %} class="page-item active" aria-current="page" {% endif %}>
+              <a class="page-link" href="./?page={{ page }}">{{ page }} <span class="sr-only">(current)</span></a>
+            </li>
+              {% endfor %}
+
+              <li {% if not pages.has_next %} class="page-item disabled" {% endif %} >
+              <a class="page-link" href="./?page={{ pages.next_num }}" aria-label="Next"><span aria-hidden="true">Next</span></a>
+            </li>
+
+          </ul>
+        </nav>
+
+    {% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base_page.html' %}
+
+    {% block title %}
+           Create Book
+        {% endblock %}
+
+    {% block content_title %}
+               Add a book
+    {% endblock %}
+
+     {% block content %}
+        <div class="col-md-6">
+            <form action="{{ url_for('books.create_book') }}" method="POST">
+
+            {% for field in form %}
+
+                <div class="form-group">
+                    {{ field.label(class='control-label') }}
+                    {{ field(class='form-control') }}
+                </div>
+            {% endfor %}
+                <button type="submit" class="btn-btn-info">Create</button>
+            </form>
+        </div>
+    {% endblock %}
